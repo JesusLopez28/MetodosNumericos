@@ -1,4 +1,3 @@
-%HOla
 clear
 clc
 
@@ -131,8 +130,73 @@ function secante()
 end
 
 function muller()
-    % Código para el método de Muller
-    disp("Función Muller");
+close all;
+clear;
+clc
+
+f = input('Ingrese la funcion: ');
+x0 = input('Ingrese el valor de x0: ');
+x1 = input('Ingrese el valor de x1: ');
+x2 = input('Ingrese el valor de x2: ');
+errorRelativo =  input('Ingrese el error permitido: ');
+
+fx = inline(f);
+
+k = 0;
+xi = 0;
+sigue = 1;
+
+
+while(sigue)
+    
+    xi = x2;
+
+    h0 = x1 - x0;
+    h1 = x2 - x1;
+    d0 = (fx(x1)-fx(x0))/(x1-x0);
+    d1 = (fx(x2) - fx(x1))/(x2-x1);
+    a = (d1-d0)/(h1+h0);
+    b = (a.*h1) + d1;
+    c = fx(x2);
+
+
+    raizd = sqrt(b.*b - 4.*a.*c);
+
+    if(abs(b+raizd) > abs(b-raizd))
+        denominador = b+ raizd;
+    else
+        denominador = b - raizd;
+    end
+
+
+    dxr = (-2.*c)/denominador;
+    x3 = x2 + dxr;
+    
+    errorActual = abs(x3 - x2)/x3;
+    errorPorcentual = errorActual*100;
+    %sigue = et < e;
+
+    fprintf('\nIteracion: ');
+    fprintf('%i',k);
+    k = k+1;
+    fprintf('\nxi: ');
+    fprintf('%f',xi);
+
+    fprintf('\nea: ');
+    fprintf('%f',errorActual);
+    fprintf('\n');
+
+
+    if(errorActual < errorRelativo)
+        break;
+    end
+    
+    x0 = x1;
+    x1 = x2;
+    x2 = x3;       
+
+end
+
 end
 
 function lagrange()
