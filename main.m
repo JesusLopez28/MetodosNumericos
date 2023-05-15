@@ -292,5 +292,12 @@ end
 
 function aproximacionPolinomialNewton()
     % Código para la Aproximación polinomial Newton
+    x = input('Ingrese el vector x: ');
+    fx = input('Ingrese el vector fx: ');
+    grado = input('Ingrese el grado del polinomio a crear: ');
+    X = input('Ingrese la coordenada a evaluar en el polinomio: ');
+    z = NewtonInt(x,fx,grado,X);
+    fprintf('%f', z);
+    fprintf('\n');
     disp("Función Aproximación polinomial Newton");
 end
