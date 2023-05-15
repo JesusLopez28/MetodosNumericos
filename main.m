@@ -133,7 +133,7 @@ function muller()
 close all;
 clear;
 clc
-
+disp("Método de Muller");
 f = input('Ingrese la funcion: ');
 x0 = input('Ingrese el valor de x0: ');
 x1 = input('Ingrese el valor de x1: ');
