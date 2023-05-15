@@ -80,8 +80,32 @@ function falsaPosicion()
 end
 
 function newtonRaphson()
-    % Código para el método de Newton-Raphson
-    disp("Función Newton-Raphson");
+    clear
+    clc
+    disp('Método de Newton Raphson')
+    syms x
+    f=input('Introduzca la función f(x):');
+    pi=input('Introduzca el punto de inicio:');
+    err=input('Porcentaje de error:');
+    ezplot(f)
+    grid on
+
+    dx=diff(f);
+    dx2=diff(dx);
+    f =inline(f);
+    dx =inline(dx);
+    dx2 =inline(dx2);
+    ea =100;
+    j =0;
+
+    while ea>err
+        xi=pi-(f(pi)*dx(pi))/((dx(pi)^2)-(f(pi)*dx2(pi)));
+        ea=abs(((xi-pi)/xi)*100);
+        pi=xi;
+        j =j+1;
+    end
+
+    fprintf('\nResultado de la raíz=%10.3f en %4d iteraciones\n',pi,j);
 end
 
 function puntoFijo()
@@ -93,15 +117,18 @@ function puntoFijo()
     xi =input('Introduzca el punto de inicio: ');
     err =input('Porcentaje de error: ');
     ezplot(f), grid on
+
     f =inline(f);
     j =0;
     ea =100;
+
     while err <= ea
         xr=f(xi);
         ea=abs(((xr-xi)/xr)*100);
         xi=xr;
         j=j+1;
     end
+
     fprintf('\nResultado de la raíz=%10.3f en %4d iteraciones\n',xr,j);
 end
 
@@ -130,72 +157,68 @@ function secante()
 end
 
 function muller()
-close all;
-clear;
-clc
-disp("Método de Muller");
-f = input('Ingrese la funcion: ');
-x0 = input('Ingrese el valor de x0: ');
-x1 = input('Ingrese el valor de x1: ');
-x2 = input('Ingrese el valor de x2: ');
-errorRelativo =  input('Ingrese el error permitido: ');
+    close all;
+    clear;
+    clc
+    disp("Método de Muller");
+    f = input('Ingrese la funcion: ');
+    x0 = input('Ingrese el valor de x0: ');
+    x1 = input('Ingrese el valor de x1: ');
+    x2 = input('Ingrese el valor de x2: ');
+    errorRelativo =  input('Ingrese el error permitido: ');
 
-fx = inline(f);
-
-k = 0;
-xi = 0;
-sigue = 1;
-
-
-while(sigue)
+    fx = inline(f);
     
-    xi = x2;
+    k = 0;
+    xi = 0;
+    sigue = 1;
 
-    h0 = x1 - x0;
-    h1 = x2 - x1;
-    d0 = (fx(x1)-fx(x0))/(x1-x0);
-    d1 = (fx(x2) - fx(x1))/(x2-x1);
-    a = (d1-d0)/(h1+h0);
-    b = (a.*h1) + d1;
-    c = fx(x2);
-
-
-    raizd = sqrt(b.*b - 4.*a.*c);
-
-    if(abs(b+raizd) > abs(b-raizd))
-        denominador = b+ raizd;
-    else
-        denominador = b - raizd;
+    while(sigue)
+        
+        xi = x2;
+    
+        h0 = x1 - x0;
+        h1 = x2 - x1;
+        d0 = (fx(x1)-fx(x0))/(x1-x0);
+        d1 = (fx(x2) - fx(x1))/(x2-x1);
+        a = (d1-d0)/(h1+h0);
+        b = (a.*h1) + d1;
+        c = fx(x2);
+      
+        raizd = sqrt(b.*b - 4.*a.*c);
+    
+        if(abs(b+raizd) > abs(b-raizd))
+            denominador = b+ raizd;
+        else
+            denominador = b - raizd;
+        end
+       
+        dxr = (-2.*c)/denominador;
+        x3 = x2 + dxr;
+        
+        errorActual = abs(x3 - x2)/x3;
+        errorPorcentual = errorActual*100;
+        %sigue = et < e;
+    
+        fprintf('\nIteracion: ');
+        fprintf('%i',k);
+        k = k+1;
+        fprintf('\nxi: ');
+        fprintf('%f',xi);
+    
+        fprintf('\nea: ');
+        fprintf('%f',errorActual);
+        fprintf('\n');
+      
+        if(errorActual < errorRelativo)
+            break;
+        end
+        
+        x0 = x1;
+        x1 = x2;
+        x2 = x3;       
+    
     end
-
-
-    dxr = (-2.*c)/denominador;
-    x3 = x2 + dxr;
-    
-    errorActual = abs(x3 - x2)/x3;
-    errorPorcentual = errorActual*100;
-    %sigue = et < e;
-
-    fprintf('\nIteracion: ');
-    fprintf('%i',k);
-    k = k+1;
-    fprintf('\nxi: ');
-    fprintf('%f',xi);
-
-    fprintf('\nea: ');
-    fprintf('%f',errorActual);
-    fprintf('\n');
-
-
-    if(errorActual < errorRelativo)
-        break;
-    end
-    
-    x0 = x1;
-    x1 = x2;
-    x2 = x3;       
-
-end
 
 end
 
