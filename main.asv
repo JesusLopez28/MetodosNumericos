@@ -3,17 +3,18 @@ clc
 
 opcion = 0;
 
-while opcion ~= 9
+while opcion ~= 10
     disp("------- MENÚ DE MÉTODOS NUMÉRICOS -------");
     disp("1. Bisección");
     disp("2. Falsa posición");
     disp("3. Newton-Raphson");
-    disp("4. Secante");
-    disp("5. Muller");
-    disp("6. Lagrange");
-    disp("7. Aproximación polinomial simple");
-    disp("8. Aproximación polinomial Newton");
-    disp("9. Salir");
+    disp("4. Punto Fijo")
+    disp("5. Secante");
+    disp("6. Muller");
+    disp("7. Lagrange");
+    disp("8. Aproximación polinomial simple");
+    disp("9. Aproximación polinomial Newton");
+    disp("10. Salir");
     disp("----------------------------------------");
 
     opcion = input("Ingresa el número correspondiente al método que deseas utilizar: ");
@@ -30,28 +31,32 @@ while opcion ~= 9
         case 3
             disp("Has seleccionado Newton-Raphson.");
             newtonRaphson();
-            
+        
         case 4
+            disp("Has seleccionado Punto Fijo.");
+            puntoFijo();
+
+        case 5
             disp("Has seleccionado Secante.");
             secante();
             
-        case 5
+        case 6
             disp("Has seleccionado Muller.");
             muller();
             
-        case 6
+        case 7
             disp("Has seleccionado Lagrange.");
             lagrange();
             
-        case 7
+        case 8
             disp("Has seleccionado Aproximación polinomial simple.");
             aproximacionPolinomialSimple();
             
-        case 8
+        case 9
             disp("Has seleccionado Aproximación polinomial Newton.");
             aproximacionPolinomialNewton();
             
-        case 9
+        case 10
             disp("Saliendo del programa...");
             
         otherwise
@@ -79,11 +84,31 @@ function newtonRaphson()
     disp("Función Newton-Raphson");
 end
 
-function secante()
-    % Código para el método de Secante
-    disp("Función Secante");
+function puntoFijo()
     clear
     clc
+    disp('Método del punto fijo')
+    syms x
+    f =input('Introduzca la función f(x): ');
+    xi =input('Introduzca el punto de inicio: ');
+    err =input('Porcentaje de error: ');
+    ezplot(f), gridon
+    f =inline(f);
+    j =0;
+    ea =100;
+    while err <= ea
+        xr=f(xi);
+        ea=abs(((xr-xi)/xr)*100);
+        xi=xr;
+        j=j+1;
+    end
+    fprintf('\nResultado de la raíz=%10.3f en %4d iteraciones\n',xr,j);
+end
+
+function secante()
+    clear
+    clc
+    disp("Método de la Secante");
     f = input('Ingrese la función: ', 's');
     x1 = input('Ingrese el punto xi-1: ');
     x2 = input('Ingrese el punto xi: ');
@@ -101,7 +126,7 @@ function secante()
         x2 = xi;
         i = i+1;
     end
-    fprintf('\n')
+    fprintf('\nRaíz de la función=%12.6f\nCalculada en%4d iteraciones\n', xi, i);
 end
 
 function muller()
