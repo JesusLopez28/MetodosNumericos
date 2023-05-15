@@ -105,8 +105,36 @@ function biseccion()
 end
 
 function falsaPosicion()
-    % Código para el método de Falsa posición
-    disp("Función Falsa posición");
+    clear
+    clc 
+    disp('Método de la Falsa Posición')
+    syms x
+    f =input('Introduzca la función f(x):');
+    xa =input('Introduzca el valor de Xa :');
+    xb =input('Introduza el valor de Xb :');
+    err =input('Porcentaje de error :');
+
+    ezplot(f), grid on
+    f =inline(f);
+    erro=100;
+    xr =0;
+    i =0;
+
+    if f(xa)*f(xb)<0
+    while erro>err
+        ea=xr;
+        xr=xb-((f(xb)*(xa-xb))/(f(xa)-f(xb)));
+        if f(xa)*f(xr)>0
+            xa=xr;
+        else
+            xb=xr;
+        end
+            erro=abs(((ea-xr)/xr)*100);
+            i=i+1;end
+            fprintf('\nResultado de la raíz=%10.3f en %4d iteraciones\n',xr,i);
+        else
+            fprintf('No existe raíz en el intervalo dado')
+    end
 end
 
 function newtonRaphson()
