@@ -70,38 +70,59 @@ end
 
 
 function biseccion()
-    clear
-    clc
-    disp('Método de la bisección')
-    syms x
-    f =input('Introduzca la función f(x):');
-    xa =input('Introduzca el valor de Xa :');
-    xb =input('Introduza el valor de Xb :');
-    err =input('Porcentaje de error :');
+clear
+clc
+disp('Método de la bisección')
+ 
+syms x
+ 
+f =input('Introduzca la función f(x):');
+ 
+xa =input('Introduzca el valor de Xa :');
+ 
+xb =input('Introduza el valor de Xb :');
+ 
+err =input('Porcentaje de error :');
+ 
+ezplot(f), gridon
+ 
+f =inline(f);
+ 
+erro=100;
+ 
+xr =0;
+ 
+i =0;
+ 
+if f(xa)*f(xb)<0
+ 
+while erro>err
+ 
+i=i+1;
+ 
+ea=xr;
+ 
+ 
+xr=(xa + xb)/2;
+ 
+ 
+if f(xa)*f(xr)>0
+ 
+xa=xr;
+ 
+else
+ 
+xb=xr;
+ 
+end
 
-    ezplot(f), grid on
-    f =inline(f);
-    erro=100;
-    xr =0;
-    i =0;
-    if f(xa)*f(xb)<0
-
-    while erro>err
-        i=i+1;
-        ea=xr;
-        xr=(xa + xb)/2;
-        if f(xa)*f(xr)>0
-            xa=xr; 
-        else
-            xb=xr;
-        end
-            erro=abs(((ea-xr)/xr)*100);
-        end
-        else
-            fprintf('No existe raíz en el intervalo dado')
-    end
-
-    fprintf('\nRaíz=%10.3f en %4d iteraciones\n',xr,i);
+ 
+erro=abs(((ea-xr)/xr)*100);
+end
+else
+fprintf('No existe raíz en el intervalo dado')
+end
+fprintf('\nRaíz=%10.3f en %4d iteraciones\n',xr,i);
 end
 
 function falsaPosicion()
