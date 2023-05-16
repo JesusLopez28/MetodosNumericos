@@ -130,28 +130,20 @@ function newtonRaphson()
     clear
     clc
     disp('Método de Newton Raphson')
-    
-    f = input('Introduzca la función f(x):', 's');
-    pi = input('Introduzca el punto de inicio:');
-    err = input('Porcentaje de error:');
-    
-    f = inline(f, 'x');
-    
+    f = input('Introduzca la función f(x): ', 's');
+    pi = input('Introduzca el punto de inicio: ');
+    err = input('Porcentaje de error: ');
     ezplot(f)
     grid on
 
-    syms x
-    df = diff(sym(f(x)));
-    df2 = diff(df);
-    
-    df = matlabFunction(df);
-    df2 = matlabFunction(df2);
-    
+    df = @(x) (eval(f) - eval(subs(f, 'x', x))) / (x - pi);
+    d2f = @(x) (df(x) - df(pi)) / (x - pi);
+    f = inline(f, 'x');
     ea = 100;
     j = 0;
 
     while ea > err
-        xi = pi - (f(pi) * df(pi)) / ((df(pi)^2) - (f(pi) * df2(pi)));
+        xi = pi - (f(pi) * df(pi)) / ((df(pi)^2) - (f(pi) * d2f(pi)));
         ea = abs(((xi - pi) / xi) * 100);
         pi = xi;
         j = j + 1;
@@ -161,6 +153,7 @@ function newtonRaphson()
 end
 
 
+
 function puntoFijo()
     clear
     clc
@@ -168,6 +161,7 @@ function puntoFijo()
     f = input('Introduzca la función f(x): ', 's');
     xi = input('Introduzca el punto de inicio: ');
     err = input('Porcentaje de error: ');
+
     f = inline(f, 'x');
     j = 0;
     ea = 100;
