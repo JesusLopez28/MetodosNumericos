@@ -272,17 +272,14 @@ function muller()
 end
 
 function lagrange()
-    % Código para el método de Lagrange
-    disp("Función Lagrange");
+
 end
 
 function aproximacionPolinomialSimple()
-    % Código para la Aproximación polinomial simple
-    disp("Función Aproximación polinomial simple");
+
 end
 
 function aproximacionPolinomialNewton()
-    % Código para la Aproximación polinomial Newton
     x = input('Ingrese el vector x: ');
     fx = input('Ingrese el vector fx: ');
     grado = input('Ingrese el grado del polinomio a crear: ');
