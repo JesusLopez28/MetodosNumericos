@@ -201,7 +201,6 @@ function secante()
 end
 
 function muller()
-    close all;
     clear;
     clc
     disp("Método de Muller");
@@ -278,6 +277,8 @@ function lagrange()
 end
 
 function aproximacionPolinomialSimple()
+    clear
+    clc
     x = input('Ingrese el vector x: ');
     fx = input('Ingrese el vector fx: ');
     X = input('Ingrese la coordenada a evaluar en el polinomio: ');
