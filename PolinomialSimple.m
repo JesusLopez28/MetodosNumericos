@@ -14,11 +14,11 @@ for i = 1:n
 end
 
 a=A\y';
-syms x real;
+%syms x real;
 r = 0;
-for i = 1:n
-    p(i) = a(i).*x.^(i-1);
-end
+%for i = 1:n
+ %   p(i) = a(i).*x.^(i-1);
+%end
 
 for i = 1:n
     r = r + a(i).*X.^(i-1);
