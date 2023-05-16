@@ -21,39 +21,30 @@ while opcion ~= 10
 
     switch opcion
         case 1
-            disp("Has seleccionado Bisección.");
             biseccion();
             
         case 2
-            disp("Has seleccionado Falsa posición.");
             falsaPosicion();
             
         case 3
-            disp("Has seleccionado Newton-Raphson.");
             newtonRaphson();
         
         case 4
-            disp("Has seleccionado Punto Fijo.");
             puntoFijo();
 
         case 5
-            disp("Has seleccionado Secante.");
             secante();
             
         case 6
-            disp("Has seleccionado Muller.");
             muller();
             
         case 7
-            disp("Has seleccionado Lagrange.");
             lagrange();
             
         case 8
-            disp("Has seleccionado Aproximación polinomial simple.");
             aproximacionPolinomialSimple();
             
         case 9
-            disp("Has seleccionado Aproximación polinomial Newton.");
             aproximacionPolinomialNewton();
             
         case 10
