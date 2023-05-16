@@ -283,6 +283,13 @@ function lagrange()
 end
 
 function aproximacionPolinomialSimple()
+    x = input('Ingrese el vector x: ');
+    fx = input('Ingrese el vector fx: ');
+    X = input('Ingrese la coordenada a evaluar en el polinomio: ');
+    z = PolinomialSimple(x,fx,X);
+    fprintf('%s', z);
+    fprintf('\n');
+    disp("Aproximacion Polinomial Simple");
 
 end
 
