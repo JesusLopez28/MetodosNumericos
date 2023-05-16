@@ -274,24 +274,12 @@ end
 function lagrange()
     clear
     clc
-    disp("Interpolación Polinomial de Newton");
-    x = input('Ingrese los valores del vector independiente x= ');
-    y = input('Ingrese los valores del vector dependiente y= ');
-    m = length(x);
-    n = m-1;
-    L = zeros(m,m);
-    for k=1:n+1
-        v = 1;
-        for j=1:n+1
-            if k~=j
-                v = conv(v, poly(x(j)))/(x(k)-x(j));
-            end
-        end
-        L(k, :) = v
-    end
-    disp('Grados del polinomio n= '), disp(n)
-    disp('Los Coeficientes del polinomio de Lagrange comenzando en An, An-1,......A1, A0 son igual a: ')
-    Coeficientes = y*L
+    x = input('Ingrese el vector x: ');
+    fx = input('Ingrese el vector fx: ');
+    X = input('Ingrese la coordenada a evaluar en el polinomio: ');
+    z = Lagrange(x,fx,X);
+    fprintf('%f', z);
+    fprintf('\n');
 end
 
 function aproximacionPolinomialSimple()
