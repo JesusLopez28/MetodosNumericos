@@ -131,21 +131,14 @@ function newtonRaphson()
     clc
     disp('Método de Newton Raphson')
     
-    f = input('Introduzca la función f(x):', 's');
+    f_str = input('Introduzca la función f(x):', 's');
+    f = @(x) eval(f_str);
+    
     pi = input('Introduzca el punto de inicio:');
     err = input('Porcentaje de error:');
-    
-    f = inline(f, 'x');
-    
-    ezplot(f)
-    grid on
 
-    syms x
-    df = diff(sym(f(x)));
-    df2 = diff(df);
-    
-    df = matlabFunction(df);
-    df2 = matlabFunction(df2);
+    df = @(x) (f(x+0.0001) - f(x)) / 0.0001;
+    df2 = @(x) (df(x+0.0001) - df(x)) / 0.0001;
     
     ea = 100;
     j = 0;
@@ -159,6 +152,7 @@ function newtonRaphson()
 
     fprintf('\nResultado de la raíz = %10.3f en %4d iteraciones\n', pi, j);
 end
+
 
 
 function puntoFijo()
