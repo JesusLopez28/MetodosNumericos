@@ -289,9 +289,7 @@ function lagrange()
         end
         L(k, :) = v
     end
-    disp('Grados del polinomio n= '), disp(n)
-    disp('Los Coeficientes del polinomio de Lagrange comenzando en An, An-1,......A1, A0 son igual a: ')
-    Coeficientes = y*L
+    disp
 end
 
 function aproximacionPolinomialSimple()
