@@ -1,0 +1,3 @@
+Path	Symbol	Reason
+main\PolinomialSimple.m	syms	undeployable
+main\main.m	syms	undeployable
