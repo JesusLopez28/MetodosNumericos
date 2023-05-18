@@ -165,14 +165,12 @@ function puntoFijo()
     f = inline(f, 'x');
     j = 0;
     ea = 100;
-
     while err <= ea
         xr = f(xi);
         ea = abs(((xr - xi) / xr) * 100);
         xi = xr;
         j = j + 1;
     end
-
     fprintf('\nResultado de la raíz = %10.3f en %4d iteraciones\n', xr, j);
 end
 
@@ -204,7 +202,7 @@ function muller()
     clear;
     clc
     disp("Método de Muller");
-    f = input('Ingrese la funcion: ');
+    f = input('Ingrese la funcion: ', 's');
     x0 = input('Ingrese el valor de x0: ');
     x1 = input('Ingrese el valor de x1: ');
     x2 = input('Ingrese el valor de x2: ');

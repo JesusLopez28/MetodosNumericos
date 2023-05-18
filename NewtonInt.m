@@ -1,3 +1,4 @@
+
 function [Y,NewtonPol,M] = NewtonInt(x,y,n,X)
 
 % ESTA FUNCION PIDE LOS SIGUIENTES DATOS DE ENTRADA:
